@@ -5,6 +5,10 @@ import { Animated, TouchableHighlight, View } from 'react-native';
 import LightboxOverlay from './LightboxOverlay';
 
 export default class Lightbox extends Component {
+  static contextTypes = {
+    actionSheet: PropTypes.func,
+  };
+
   static propTypes = {
     activeProps:     PropTypes.object,
     renderHeader:    PropTypes.func,
@@ -123,7 +127,7 @@ export default class Lightbox extends Component {
           <TouchableHighlight
             underlayColor={this.props.underlayColor}
             onPress={this.open}
-            onLongPress={this.props.onLongPress}
+            onLongPress={() => this.props.onLongPress(this.context, this.props)}
           >
             {this.props.children}
           </TouchableHighlight>
